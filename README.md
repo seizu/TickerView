@@ -4,9 +4,7 @@ A real-time cryptocurrency and asset price display for ESP32 with SSD1351 OLED d
 
 ## Demo
 
-<video src="docs/TickerViewDemo.mp4" controls>
-  Your browser does not support the video tag. <a href="docs/TickerViewDemo.mp4">Download the demo video</a>
-</video>
+[Demo Video ansehen](docs/TickerViewDemo.mp4)
 
 *TickerView in action showing rotating assets with bounce animation*
 
@@ -129,9 +127,7 @@ On first boot, TickerView will:
 2. Open a web browser and navigate to `http://10.100.10.1`
 3. Configure your settings (see below)
 
-<video src="docs/WebPrefs.mp4" controls>
-  Your browser does not support the video tag. <a href="docs/WebPrefs.mp4">Download the WebPrefs UI demo</a>
-</video>
+[WebPrefs UI demo](docs/WebPrefs.mp4)
 
 *WebPrefs configuration interface walkthrough*
 
