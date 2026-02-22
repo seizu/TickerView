@@ -1,0 +1,172 @@
+<body onload="init('form');"><div id="spn" calss="spinner"></div>
+<div class="bog">
+	<div class="banner" id="banner"></div>
+	<textarea id="info_text" class="clean-right" disabled></textarea>
+
+
+	<form id="myPrefs" action="./postForm">
+
+	<div class="divider">Symbol Settings</div>
+	<label>Symbol 1 (3-15 chars)
+	<input type="text" data-uppost id="symbol1"></label>
+	<label>Name (1-6 chars)
+	<input type="text" data-uppost id="asset1"></label>
+	<label>Digits (1-7)
+	<input type="text" data-uppost id="digits1"></label>
+	<div class="spacer-mid"></div>
+	<label>Symbol 2 (3-15 chars)
+	<input type="text" data-uppost id="symbol2"></label>
+	<label>Name (1-6 chars)
+	<input type="text" data-uppost id="asset2"></label>
+	<label>Digits (1-7)
+	<input type="text" data-uppost id="digits2"></label>
+	<div class="spacer-mid"></div>
+	<label>Symbol 3 (3-15 chars)
+	<input type="text" data-uppost id="symbol3"></label>
+	<label>Name (1-6 chars)
+	<input type="text" data-uppost id="asset3"></label>
+	<label>Digits (1-7)
+	<input type="text" data-uppost id="digits3"></label>
+	<div class="spacer-mid"></div>
+	<label>Symbol 4 (3-16 chars)
+	<input type="text" data-uppost id="symbol4"></label>
+	<label>Name (1-6 chars)
+	<input type="text" data-uppost id="asset4"></label>
+	<label>Digits (1-7)
+	<input type="text" data-uppost id="digits4"></label>
+
+	<div class="divider">Appearance & History Settings</div>
+
+	<label>Price Update Interval (1-60 min)
+	<input type="text" data-up id="price_update"></label>
+
+	<label>Display Time (1-60 sec)
+	<input type="text" data-uppost id="display_time"></label>
+
+	<label>History Window (1-24 hrs)
+	<input type="text" data-up id="history_window"></label>
+	
+	<label>Text X Pos (0-10 pix)
+	<input type="text" data-uppost id="x_offset"></label>
+
+	<label>Show Price Change Percent</label>
+	<div class="cbWrapper">
+		<input type="hidden" value="off">
+		<input type="checkbox" data-uppost id="show_percent" class="cbToggle">
+		<label class="switch" for="show_percent"></label>
+	</div>
+
+	<label>Show History Window</label>
+	<div class="cbWrapper">
+		<input type="hidden" value="off">
+		<input type="checkbox" data-uppost id="show_hw" class="cbToggle">
+		<label class="switch" for="show_hw"></label>
+	</div>
+
+	<label>Show History Price</label>
+	<div class="cbWrapper">
+		<input type="hidden" value="off">
+		<input type="checkbox" data-uppost id="show_hp" class="cbToggle">
+		<label class="switch" for="show_hp"></label>
+	</div>
+
+	<label>Show DateTime</label>
+	<div class="cbWrapper">
+		<input type="hidden" value="off">
+		<input type="checkbox" data-uppost id="show_time" class="cbToggle">
+		<label class="switch" for="show_time"></label>
+	</div>
+
+	<div class="divider">WiFi / Network</div>
+
+	<label>WiFi SSID
+	<input type="text" data-up id="wifi_ssid"></label>
+
+	<label>WiFi Password (min. 8 chars)
+	<input type="password" data-up id="sta_wifi_passwd"></label>
+	
+	<label>WiFi Check Interval (5-65535 sec)
+	<input type="text" data-uppost id="wifi_check_sec"></label>
+
+	<label>AP Fallback Attempts (0 = off)
+	<input type="text" data-up id="ap_fallback"></label>
+
+	<label>AP Mode</label>
+	<div class="cbWrapper">
+		<input type="hidden" value="off">
+		<input type="checkbox" data-up id="ap_only" class="cbToggle" activation-rules="[-29]">
+		<label class="switch" for="ap_only"></label>
+	</div>
+	
+	<label>AP WiFi Password (min. 8 chars)
+	<input type="password" data-up id="ap_wifi_passwd"></label>
+
+	<label>AP Channel (1-13)
+	<input type="text" data-up id="ap_channel"></label>
+
+	<label>Static IP (Off = DHCP)</label>
+	<div class="cbWrapper">
+		<input type="hidden" value="off">
+		<input type="checkbox" data-up id="staticip_enabled" class="cbToggle" activation-rules="[30,31,32,33,34]">
+		<label class="switch" for="staticip_enabled"></label>
+	</div>
+
+	<label>IP Address (v4)
+	<input type="text" id="ip_address" data-up></label>
+
+	<label>Subnetmask
+	<input type="text" id="subnetmask" data-up></label>
+
+	<label>Gateway Address
+	<input type="text" id="gateway_address" data-up></label>
+
+	<label>DNS Server Address 1
+	<input type="text" id="dns1_address" data-up></label>
+
+	<label>DNS Server Address 2
+	<input type="text" id="dns2_address" data-up></label>
+
+	<div class="divider">WebPrefs Interface Settings</div>
+	
+	<label>WebPrefs Login</label>
+	<div class="cbWrapper">
+		<input type="hidden" value="off">		
+		<input type="checkbox" data-up id="web_auth" class="cbToggle" activation-rules="[36,37]">
+		<label class="switch" for="web_auth"></label>
+	</div>
+
+	<label>WebPrefs User
+	<input type="text" data-uppost id="web_user"></label>
+	
+	<label>WebPrefs Password
+	<input type="password" data-uppost id="web_passwd"></label>
+
+	<!--label>WebPrefs Idle Timeout (1-60 min)
+	<input type="text" data-uppost id="web_idle_timeout"></label-->
+	
+	<!--label>WiFi Off on Idle</label>
+	<div class="cbWrapper">
+		<input type="hidden" value="off">
+		<input type="checkbox" data-uppost id="disable_wifi" class="cbToggle">
+		<label class="switch" for="disable_wifi"></label>
+	</div-->
+
+	<div class="container">
+		<div class="column-center"><button type="submit">Save</button></div>
+		<div><button onclick="location.href='./done'" type="button">Done/Reboot</button></div>
+	</div>
+</form>
+
+<div class="divider">Firmware</div>
+<form id="upload">
+
+<div class="container">
+	<div><input type="text" value="" id="filename" disabled></div>
+	<div class="column-center"><button type="button" onclick="document.getElementById('firmware').click()">Browse File</button></div>
+	</div>
+	<button type="submit">Update Firmware</button>    
+</div>
+<input type="file" style="visibility: hidden" id="firmware" name="firmware" onchange="document.getElementById('filename').value=this.files[0].name;" accept=".bin">
+</form>
+
+</div></body>
