@@ -191,7 +191,6 @@ For each asset (1-4), configure:
 | Web Auth | Enable authentication |
 | Username | Login username (min 3 chars) |
 | Password | Login password |
-| Idle Timeout | Session timeout in minutes |
 
 ## Usage
 
