@@ -4,7 +4,7 @@ A real-time cryptocurrency and asset price display for ESP32 with SSD1351 OLED d
 
 ## Demo
 
-[Demo Video ansehen](docs/TickerViewDemo.mp4)
+[Demo Video ansehen](https://seizu.github.io/TickerView/TickerViewDemo.mp4)
 
 *TickerView in action showing rotating assets with bounce animation*
 
@@ -127,7 +127,7 @@ On first boot, TickerView will:
 2. Open a web browser and navigate to `http://10.100.10.1`
 3. Configure your settings (see below)
 
-[WebPrefs UI demo](docs/WebPrefs.mp4)
+[WebPrefs UI demo](https://seizu.github.io/TickerView/WebPrefs.mp4)
 
 *WebPrefs configuration interface walkthrough*
 
