@@ -4,7 +4,7 @@ A real-time cryptocurrency and asset price display for ESP32 with SSD1351 OLED d
 
 ## Demo
 
-[Demo Video ansehen](https://seizu.github.io/TickerView/TickerViewDemo.mp4)
+[TickerView demo](https://seizu.github.io/TickerView/TickerViewDemo.mp4)
 
 *TickerView in action showing rotating assets with bounce animation*
 
