@@ -1,7 +1,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#define TICKERVIEW_VERSION "1.0"
+#define TICKERVIEW_VERSION "1.1"
 
 #include <Arduino.h>
 #include "secrets.h"
