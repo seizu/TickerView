@@ -39,6 +39,7 @@ extern SPIClass vspi;
 extern Adafruit_SSD1351 tft;
 extern AssetData assets[NUM_ASSETS];
 extern int buffer_index;
+extern int buffer_size;
 extern bool buffer_full;
 extern int y_offset;
 

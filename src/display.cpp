@@ -14,7 +14,22 @@ void initDisplay(const char * hostip) {
 }
 
 float getOldPrice(int asset_index) {
+    // Bounds checking
+    if (asset_index < 0 || asset_index >= NUM_ASSETS) {
+        return 0.0f;
+    }
+
+    if (assets[asset_index].price_buffer == nullptr) {
+        return 0.0f;
+    }
+
     int oldest_index = buffer_full ? buffer_index : 0;
+
+    // Bounds check for buffer index
+    if (oldest_index < 0 || oldest_index >= buffer_size) {
+        return assets[asset_index].current_price; // Fallback to current price
+    }
+
     return assets[asset_index].price_buffer[oldest_index];
 }
 

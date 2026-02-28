@@ -4,27 +4,53 @@
 
 float getPrice(const char* symbol) {
     if (WiFi.status() != WL_CONNECTED) {
+        LOG_SDEBUG("WiFi not connected");
         return 0;
     }
-    bool result = false;
+
     WiFiClientSecure client;
     client.setInsecure();
     HTTPClient http;
 
-    String url = "https://fapi.binance.com/fapi/v1/premiumIndex?symbol=";
-    url += symbol;
+    char url[128];
+    snprintf(url, sizeof(url), "https://fapi.binance.com/fapi/v1/premiumIndex?symbol=%s", symbol);
 
-    http.begin(client, url.c_str());
+    http.begin(client, url);
+    http.setTimeout(5000); // 5 second timeout
     int http_code = http.GET();
 
-    float price = 0;
+    float price = 0.0f;
     if (http_code == 200) {
         String payload = http.getString();
+
+        // Specify JsonDocument size (Binance API response ~200 bytes)
         JsonDocument doc;
-        deserializeJson(doc, payload);
-        price = doc["indexPrice"].as<float>();
+
+        // Parse JSON with error checking
+        DeserializationError error = deserializeJson(doc, payload);
+
+        if (error) {
+            LOG_SERROR("JSON parse failed for %s: %s", symbol, error.c_str());
+            http.end();
+            return 0.0f;
+        }
+
+        // Validate that indexPrice field exists and is valid
+        if (!doc["indexPrice"].isNull()) {
+            price = doc["indexPrice"].as<float>();
+
+            // Validate the price is a real number
+            if (isnan(price) || isinf(price) || price < 0.0f) {
+                LOG_SERROR("Invalid price for %s: %f", symbol, price);
+                price = 0.0f;
+            }
+        } else {
+            LOG_SERROR("indexPrice field missing for %s", symbol);
+        }
+    } else {
+        LOG_SERROR("HTTP error for %s: %d", symbol, http_code);
     }
-    
+
     http.end();
     return price;
 }
