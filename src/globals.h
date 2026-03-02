@@ -27,11 +27,11 @@
 #include "SimpleWifi.h"
 #include "WebPrefs.h"
 #include "config/WebPrefsConfig.h"
-#include "RealTimeClock.h"
+#include "TimeManager.h"
 
 // --- global instances ---
 extern DeviceConfig dc;
-extern RealTimeClock rtc;
+extern TimeManager tm;
 extern SimpleWifi sw;
 extern WebPrefs wp;
 extern ulong ntp_update_event;

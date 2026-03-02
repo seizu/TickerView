@@ -1,11 +1,11 @@
-#ifndef RTCLOCK_H
-#define RTCLOCK_H
+#ifndef TIMEMANAGER_H
+#define TIMEMANAGER_H
 
 #include <Arduino.h>  // Required for PlatformIO
 #include <time.h>
 #include "serlog.h"
 
-class RealTimeClock {
+class TimeManager {
   public:
     bool syncNTP();
     void setNTP(const char* ntp_server, const long gmt_offset, int daylight_offset); 
@@ -25,4 +25,4 @@ class RealTimeClock {
     bool use_posix_tz = false;
 };
 
-#endif // RTCLOCK_H
+#endif // TIMEMANAGER_H

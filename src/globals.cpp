@@ -2,7 +2,7 @@
 
 // --- global instances ---
 DeviceConfig dc;
-RealTimeClock rtc;
+TimeManager tm;
 SimpleWifi sw;
 WebPrefs wp;
 

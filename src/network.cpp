@@ -95,7 +95,7 @@ void updateNTP() {
     if(dc.ntp_enabled) {
         if(((TIMENOW - ntp_update_event) > NTP_UPDATE_INTERVAL * 1000 * 60) || ntp_update_event == 0) {
             if(WiFi.isConnected()) {
-                ntp_updated = rtc.syncNTP();
+                ntp_updated = tm.syncNTP();
                 if(ntp_updated) {
                     ntp_update_event = TIMENOW;
                 }

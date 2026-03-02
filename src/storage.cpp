@@ -7,15 +7,15 @@
 // ====================================================================================================
 void cbNTPConfigUpdate() {
     if(*dc.tz_string == '\0') {
-        rtc.setNTP(dc.ntp_server, dc.gmt_offset, dc.daylight_offset);
+        tm.setNTP(dc.ntp_server, dc.gmt_offset, dc.daylight_offset);
     } else {
-        rtc.setNTPWithTimezone(dc.ntp_server, dc.tz_string);
+        tm.setNTPWithTimezone(dc.ntp_server, dc.tz_string);
     }
 }
 
 // void cbSetClock() {
 //     LOG_SDEBUG("Set Clock: %s", dc.date_time);
-//     rtc.setTimestamp(dc.date_time);
+//     tm.setTimestamp(dc.date_time);
 // }
 
 

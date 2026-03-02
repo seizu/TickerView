@@ -1,13 +1,13 @@
-#include "RealTimeClock.h"
+#include "TimeManager.h"
 
-void RealTimeClock::setNTP(const char* ntp_server, const long gmt_offset, int daylight_offset) {
+void TimeManager::setNTP(const char* ntp_server, const long gmt_offset, int daylight_offset) {
     localtime_offset = gmt_offset + daylight_offset;
     use_posix_tz = false;
     configTime(gmt_offset, daylight_offset, ntp_server);
 }
 
 // NTP + POSIX-TZ (CET/CEST for Vienna "CET-1CEST,M3.5.0/2,M10.5.0/3")
-void RealTimeClock::setNTPWithTimezone(const char* ntp_server, const char* tz_string) {
+void TimeManager::setNTPWithTimezone(const char* ntp_server, const char* tz_string) {
 
     localtime_offset = 0;
     use_posix_tz = true;
@@ -22,7 +22,7 @@ void RealTimeClock::setNTPWithTimezone(const char* ntp_server, const char* tz_st
 #endif
 }
 
-bool RealTimeClock::syncNTP() {
+bool TimeManager::syncNTP() {
 
     LOG_SDEBUG("Checking NTP time...");
 
@@ -47,12 +47,12 @@ bool RealTimeClock::syncNTP() {
 #endif
 }
 
-void RealTimeClock::setTimestamp(uint32_t unix_timestamp) {
+void TimeManager::setTimestamp(uint32_t unix_timestamp) {
     stored_timestamp = unix_timestamp;
     last_update = millis();
 }
 
-void RealTimeClock::setTimestamp(const char *date_time, bool utc) {
+void TimeManager::setTimestamp(const char *date_time, bool utc) {
 
     struct tm t = {0};
     sscanf(date_time, "%d-%d-%d %d:%d:%d",
@@ -81,7 +81,7 @@ void RealTimeClock::setTimestamp(const char *date_time, bool utc) {
     }
 }
 
-ulong RealTimeClock::getLocalTimestamp() {
+ulong TimeManager::getLocalTimestamp() {
     time_t now = getTimestamp();
     if (!use_posix_tz) return (ulong)(now + localtime_offset);
 
@@ -95,12 +95,12 @@ ulong RealTimeClock::getLocalTimestamp() {
     return (ulong)(now + offset);
 }
 
-ulong RealTimeClock::getTimestamp() {
+ulong TimeManager::getTimestamp() {
     updateTimestamp();
     return stored_timestamp;
 }
 
-void RealTimeClock::updateTimestamp() {
+void TimeManager::updateTimestamp() {
     uint32_t now = millis();
     uint32_t elapsed = now - last_update;
     if (elapsed >= 1000) {
@@ -109,11 +109,11 @@ void RealTimeClock::updateTimestamp() {
     }
 }
 
-String RealTimeClock::getFormattedTimestamp() {
+String TimeManager::getFormattedTimestamp() {
     return getFormattedTimestamp("%Y-%m-%d %H:%M:%S");
 }
 
-String RealTimeClock::getFormattedTimestamp(const char * format) {
+String TimeManager::getFormattedTimestamp(const char * format) {
     time_t ts = getTimestamp();
     struct tm tm_info;
     localtime_r(&ts, &tm_info);
