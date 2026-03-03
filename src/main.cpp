@@ -103,7 +103,7 @@ void setup() {
     initWifi();
 
     // (WebPrefs already validates history_window: 1-24, price_update: 1-60)
-    buffer_size = (dc.history_window * 60) / dc.price_update;
+    buffer_size = (dc.history_window * 60) / dc.price_update + 1;
 
     LOG_SINFO("Buffer size: %d entries (%d bytes per asset, %d total)",
               buffer_size,
