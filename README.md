@@ -267,11 +267,12 @@ Select environment in `platformio.ini` or via PlatformIO UI.
 ```
 TickerView/
 ├── src/
-│   ├── main.cpp              # Main application logic
-│   ├── display.cpp/h         # Display functions
-│   ├── network.cpp/h         # WiFi and API functions
-│   ├── storage.cpp/h         # Configuration storage
-│   ├── globals.cpp/h         # Global variables
+│   ├── main.cpp              # Main application logic, timers, loop
+│   ├── crypto.cpp/h          # Price fetching, buffer management, change calculation
+│   ├── display.cpp/h         # Display rendering, AssetData struct, NUM_ASSETS
+│   ├── network.cpp/h         # WiFi, HTTP client
+│   ├── storage.cpp/h         # Configuration storage (EEPROM)
+│   ├── globals.cpp/h         # Global instances (dc, tm, sw, wp)
 │   ├── config/
 │   │   ├── hardware.h        # Pin definitions
 │   │   ├── webPrefsConfig.h  # Web UI configuration
@@ -297,9 +298,9 @@ You can track any asset available on Binance Futures:
 The code is structured for easy customization:
 
 - **Display layout**: Edit `display.cpp` functions
-- **API source**: Modify `getPrice()` in `network.cpp`
+- **API source**: Modify `getBinancePrice()` in `crypto.cpp`
 - **Update intervals**: Adjust via web config or defaults in `webPrefsConfig.h`
-- **Number of assets**: Change `NUM_ASSETS` in `globals.h` (requires code changes for >4 assets)
+- **Number of assets**: Change `NUM_ASSETS` in `display.h` (requires code changes for >4 assets)
 
 ## License
 
