@@ -47,6 +47,5 @@ extern int y_offset;
 void initDisplay(const char * hostip);
 void displayAsset(const char* symbol, float price, float old_price, int digits, float change, int x_offset, int y_offset);
 void displayDateTime();
-float getOldPrice(int asset_index);
 
 #endif // DISPLAY_H

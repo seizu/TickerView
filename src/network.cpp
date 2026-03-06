@@ -1,58 +1,41 @@
 #include "globals.h"
 #include "network.h"
 
+HttpResult result;
 
-float getPrice(const char* symbol) {
-    if (WiFi.status() != WL_CONNECTED) {
-        LOG_SDEBUG("WiFi not connected");
-        return 0;
-    }
+/**
+ * Performs an HTTP GET request to the specified URL
+ *
+ * @param url      The URL to fetch
+ * @param result   Output struct containing HTTP status code, bytes read and payload
+ * @param time_out Request timeout in milliseconds - default 3000
+ * @return true if the request was successful (HTTP status 1xx-3xx), false on error or HTTP 4xx/5xx
+ */
+bool httpGet(const String &url, HttpResult &result, const uint16_t time_out) {
+    result.code = -1;
+    result.bytes_read = 0;
+    result.payload[0] = '\0';
 
     WiFiClientSecure client;
     client.setInsecure();
     HTTPClient http;
+    http.setTimeout(time_out);
 
-    char url[128];
-    snprintf(url, sizeof(url), "https://fapi.binance.com/fapi/v1/premiumIndex?symbol=%s", symbol);
+    if (http.begin(client, url)) {
+        result.code = http.GET();
 
-    http.begin(client, url);
-    http.setTimeout(5000); // 5 second timeout
-    int http_code = http.GET();
-
-    float price = 0.0f;
-    if (http_code == 200) {
-        String payload = http.getString();
-
-        // Specify JsonDocument size (Binance API response ~200 bytes)
-        JsonDocument doc;
-
-        // Parse JSON with error checking
-        DeserializationError error = deserializeJson(doc, payload);
-
-        if (error) {
-            LOG_SERROR("JSON parse failed for %s: %s", symbol, error.c_str());
-            http.end();
-            return 0.0f;
-        }
-
-        // Validate that indexPrice field exists and is valid
-        if (!doc["indexPrice"].isNull()) {
-            price = doc["indexPrice"].as<float>();
-
-            // Validate the price is a real number
-            if (isnan(price) || isinf(price) || price < 0.0f) {
-                LOG_SERROR("Invalid price for %s: %f", symbol, price);
-                price = 0.0f;
+        if (result.code > 0) {
+            String payload = http.getString();
+            result.bytes_read = payload.length();
+            if (result.bytes_read >= sizeof(result.payload)) {
+                result.bytes_read = sizeof(result.payload) - 1;
             }
-        } else {
-            LOG_SERROR("indexPrice field missing for %s", symbol);
+            memcpy(result.payload, payload.c_str(), result.bytes_read);
+            result.payload[result.bytes_read] = '\0';
         }
-    } else {
-        LOG_SERROR("HTTP error for %s: %d", symbol, http_code);
+        http.end();
     }
-
-    http.end();
-    return price;
+    return (result.code > 0 && result.code < 400);
 }
 
 /**
